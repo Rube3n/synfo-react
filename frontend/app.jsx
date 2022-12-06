@@ -18,7 +18,7 @@ import { createRoot } from "react-dom/client";
 import Client from "./src/pages/client";
 import Product from "./src/pages/product";
 import Update from "./src/pages/update";
-import View from "./src/pages/view/";
+import View from "./src/pages/view";
 const router = createBrowserRouter([
   {
     path: "/",
