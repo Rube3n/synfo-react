@@ -13,7 +13,7 @@ Encore
   .setPublicPath("/build")
   // only needed for CDN's or subdirectory deploy
   //.setManifestKeyPrefix('build/')
-  .addEntry("admin", "./assets/js/admin.js")
+  .addEntry("admin", "../frontend/src/pages/js/admin.jsx")
   /*
    * ENTRY CONFIG
    *
