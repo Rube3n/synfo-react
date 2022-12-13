@@ -1,48 +1,54 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import { URL_PRODUCT } from "../../../middleware/environment";
 
 const Update = () => {
-  const getAllProduct = async () => {
+  const [product, setProduct] = useState({
+    id: useParams().id,
+    name: "",
+    description: "",
+    price: 0,
+  });
+
+  const onChangeName = (event) => {
+    setProduct({
+      ...product,
+      name: event.target.value,
+    });
+  };
+  const onChangeDescription = (event) => {
+    setProduct({
+      ...product,
+      description: event.target.value,
+    });
+  };
+  const onChangePrice = (event) => {
+    setProduct({
+      ...product,
+      price: parseFloat.event.target.value,
+    });
+  };
+
+  axios
+    .put(`${URL}`, { name: text, description: description, price: price })
+    .then((response) => {
+      console.log("donnée mis à jour");
+    })
+    .catch((err) => {
+      console.log(error);
+    });
+
+  const SubmitProduct = async () => {
     await axios
-      .get("http://localhost:8000/api/products" + id)
-      .then((response) => {
-        getProduct(response.data["hydra:member"]);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  useEffect(() => {
-    getAllProduct();
-  }, []);
-
-  const [editText, setUpdateText] = useState("");
-  const [editDescription, setUpdateDescription] = useState("");
-  const [editPrice, setUpdatePrice] = useState("");
-
-  const handleChangeEditDescription = (event) => {
-    setUpdateDescription(event.target.value);
-    console.log(event.target.value);
-  };
-  const handleChangeEditText = (event) => {
-    setUpdateText(event.target.value);
-    console.log(event.target.value);
-  };
-  const handleChangeEditPrice = (event) => {
-    setUpdatePrice(parseFloat(event.target.value));
-    console.log(event.target.value);
-  };
-
-  const submitForm = () => {
-    axios
-      .put(`${URL}`, {
-        name: editText,
-        description: editDescription,
-        price: editPrice,
+      .put(`${URL_PRODUCT}/${product.id}`, {
+        name: product.name,
+        description: product.description,
+        price: product.price,
       })
       .then((response) => {
-        console.log("Données Update");
+        console.log(response);
       })
       .catch((err) => {
         console.error(err);
@@ -53,43 +59,23 @@ const Update = () => {
     <>
       <h1>Hello update</h1>
 
-      <form
-        action=""
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "50%",
-          marginTop: "2rem",
-          marginBottom: "2rem",
-        }}
-      >
-        <label htmlFor="text">Nom du produit :</label>
+      <form>
+        <label htmlFor="">Nom :</label>
+        <input type="text" onChange={onChangeName} value={product.name} />
+        <label htmlFor=""> description :</label>
         <input
           type="text"
-          id="text"
-          name="text"
-          value={editText}
-          onChange={handleChangeEditText}
+          onChange={onChangeDescription}
+          value={product.description}
         />
-        <label htmlFor="description">Description :</label>
-        <textarea
-          id="description"
-          name="description"
-          value={editDescription}
-          onChange={handleChangeEditDescription}
-        />
-        <label htmlFor="price">Prix :</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          value={editPrice}
-          onChange={handleChangeEditPrice}
-        />
-        <button type="button" onClick={() => submitForm()}>
-          Envoyer
-        </button>
+        <label htmlFor="">Prix :</label>
+        <input type="text" onChange={onChangePrice} value={product.price} />
+        <button type="button" onClick={() => SubmitProduct()}></button>
       </form>
+
+      <button type="button" onClick={() => Update(product.id)}>
+        Mise a jour
+      </button>
     </>
   );
 };

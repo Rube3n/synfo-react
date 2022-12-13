@@ -1,21 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Product from "../product";
 
 const View = () => {
-  const [prdoduct, setProduct] = useState({
-    id:"",
+  const [product, setProduct] = useState({
     name: "",
     description: "",
-    price: "",
+    price: "0",
   });
 
 const {id}=useParams();
 
-const loadProduct = async ()=>{
-    const result=await axios.get(`http//localhost:8000/view/${id}`)
-}
 
   return (
     <div>
@@ -25,21 +20,21 @@ const loadProduct = async ()=>{
         <ul>
         <li>
                 <p>id :</p>
-                {Product.id}
+                {product.id}
             </li>
             <li>
                 <p>name:</p>
-                {Product.name}
+                {product.name}
 
             </li>
             <li>
                 <p>desc:</p>
-                {Product.description}
+                {product.description}
 
             </li>
             <li>
                 <p>price:</p>
-                {Product.price}
+                {product.price}
 
             </li>
         </ul>
