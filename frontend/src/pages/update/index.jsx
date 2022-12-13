@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { URL_PRODUCT } from "../../../middleware/environment";
+import { URL_PRODUCT } from "../../middleware/environment";
 
 const Update = () => {
   const [product, setProduct] = useState({
