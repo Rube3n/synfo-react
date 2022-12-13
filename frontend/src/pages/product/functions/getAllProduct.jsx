@@ -44,6 +44,13 @@ const Product = () => {
 
   return (
     <>
+    <nav>
+      <ul>
+        <li>
+            <Link to={'/logout'}>deconection</Link>
+        </li>
+      </ul>
+    </nav>
       <form
         action=""
         style={{
